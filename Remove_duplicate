@@ -1,0 +1,43 @@
+int removeDuplicates(vector& nums) {
+int n=nums.size();
+set a;
+for(int i=0;i<n;i++){
+a.insert(nums[i]);
+}
+nums.clear();
+for(auto x:a){
+nums.push_back(x);
+}
+return a.size();
+}
+
+
+using STL:-
+ int removeDuplicates(vector<int>& nums) {
+        nums.erase( unique( nums.begin(), nums.end() ), nums.end() );
+		return nums.size();
+    }
+    
+    
+    using QUEUE:-
+    int removeDuplicates(vector& nums) {
+
+    if(nums.size()==0){                  // if size is 0, return 0 
+        return 0;                         
+    }
+    queue<int> q;                                      // using queue, becuz of its FIFO property
+    for(int i=1;i<nums.size();i++){              // push all the elements in queue except the first element 
+        q.push(nums[i]);
+    }
+    int i=0;                                                
+    while(!q.empty()){
+        if(q.front()!=nums[i]){              // check if top element of queue is same as that of first element of vector
+            i++;                                     // if not same, then increment i and change the value of nums[i] to q.front()
+            nums[i]=q.front();  
+        }    
+        q.pop();                                    // if same, then simply pop that element and forget about it
+    
+    }
+   return i+1;                                  
+}
+};
